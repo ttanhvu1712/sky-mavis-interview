@@ -1,0 +1,27 @@
+@import "styles/functions";
+@import "styles/variables";
+
+.container {
+  background: #ffffff;
+  border: 1px solid #c5cee0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 100%;
+  height: toVW(40);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: toVW(4);
+
+  input {
+    border: none;
+    outline: none;
+    height: 100%;
+    border-radius: 8px;
+    color: #151a30;
+    font-family: $font-secondary;
+    font-style: normal;
+    font-weight: 400;
+    font-size: toVW(14);
+  }
+}

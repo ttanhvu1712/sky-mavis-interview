@@ -1,0 +1,21 @@
+@use "sass:math";
+
+$html-screen-width-default: 375 !default; //screen width of design
+@function toVW($pixels, $htmlScreenWidth: $html-screen-width-default) {
+  $unit: unit($pixels);
+
+  @if ($unit== "") {
+    @return calc(($pixels / $htmlScreenWidth) * 100vw);
+  }
+
+  @if ($unit== "px") {
+    $pixels: strip-unit($pixels);
+    @return calc(($pixels / $htmlScreenWidth) * 100vw);
+  }
+
+  @if ($unit== "em" or $unit== "rem" or $unit== "vw" or $unit== "vh" or $unit== "%") {
+    @return $pixels;
+  }
+
+  @error "Pixels: `#{$pixels}`, `#{$unit}`";
+}

@@ -7,11 +7,11 @@ type PaperFallProp = {
 
 const PaperFall: React.FC<PaperFallProp> = ({ numberOfFlake }) => {
   return (
-    <div>
+    <>
       {new Array(numberOfFlake).fill(1).map((_, idx) => (
         <div key={idx} className={styles.flake} />
       ))}
-    </div>
+    </>
   );
 };
 

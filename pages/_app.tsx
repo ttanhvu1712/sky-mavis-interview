@@ -1,7 +1,7 @@
 import { AppPropsWithLayout } from "types";
 import { Provider } from "react-redux";
 import { store } from "src/slices";
-import "styles/globals.css";
+import "styles/index.scss";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);

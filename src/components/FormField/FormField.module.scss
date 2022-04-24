@@ -1,0 +1,21 @@
+@import "styles/variables.scss";
+@import "styles/functions.scss";
+
+.container {
+  width: 100%;
+  .title {
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: toVW(10);
+    line-height: 16px;
+    color: #57627b;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    span:nth-child(2) {
+      letter-spacing: 0.5px;
+      color: #151a30;
+    }
+  }
+}
