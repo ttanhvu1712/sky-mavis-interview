@@ -1,0 +1,62 @@
+@import "styles/functions";
+@import "styles/variables";
+
+.container {
+  width: 100%;
+  height: toVW(152);
+  background: linear-gradient(256.28deg, #1c94f4 0%, #1273ea 100%);
+  box-shadow: 0px 12px 20px -4px #c5cee0;
+  border-radius: 16px;
+  margin-top: toVW(20);
+  padding: toVW(18) toVW(20);
+  position: relative;
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: toVW(14);
+    border-bottom: 1px solid #68b8f8;
+    .title {
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: toVW(14);
+      line-height: toVW(20);
+      color: #ffffff;
+      margin-right: toVW(8);
+    }
+    .walletAddress {
+      font-family: $font-primary;
+      font-weight: 400;
+      font-size: toVW(14);
+      line-height: toVW(20);
+      color: #8dc9f9;
+      flex: 1 1;
+    }
+  }
+
+  .totalPropertyInUSD {
+    font-family: $font-primary;
+    font-style: normal;
+    font-weight: 700;
+    font-size: toVW(32);
+    line-height: toVW(40);
+    margin-top: toVW(12);
+    color: #ffffff;
+  }
+  .totalPropertyInVND {
+    font-family: $font-primary;
+    font-style: normal;
+    font-weight: 700;
+    font-size: toVW(16);
+    line-height: toVW(24);
+    margin-top: toVW(4);
+    color: #8dc9f9;
+  }
+  .iconRonin {
+    position: absolute;
+    right: toVW(20);
+    bottom: toVW(18);
+  }
+}
