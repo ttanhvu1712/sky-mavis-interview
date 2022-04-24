@@ -1,7 +1,14 @@
-import type { NextPage } from "next";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "types";
+import { NavBarLayout } from "src/layouts";
+import { Exchange } from "src/domains";
 
-const Exchange: NextPage = () => {
-  return <div>Send Assets Page</div>;
+const ExchangePage: NextPageWithLayout = () => {
+  return <Exchange />;
 };
 
-export default Exchange;
+ExchangePage.getLayout = function getLayout(page: ReactElement) {
+  return <NavBarLayout>{page}</NavBarLayout>;
+};
+
+export default ExchangePage;

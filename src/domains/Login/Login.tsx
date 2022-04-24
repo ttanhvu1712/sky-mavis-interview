@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Buffer.module.scss";
+import styles from "./Login.module.scss";
 
 const Login: React.FC = () => {
   return <div className={styles.container}>NavBarLayout</div>;

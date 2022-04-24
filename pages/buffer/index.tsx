@@ -1,9 +1,9 @@
 import React from "react";
 import type { NextPage } from "next";
-import styles from "./Buffer.module.css";
+import { Buffer } from "src/domains";
 
-const Buffer: NextPage = () => {
-  return <div className={styles.module}>Buffer Page</div>;
+const BufferPage: NextPage = () => {
+  return <Buffer />;
 };
 
-export default Buffer;
+export default BufferPage;

@@ -1,9 +1,14 @@
-import React from "react";
-import type { NextPage } from "next";
-import styles from "./Home.module.css";
+import type { ReactElement } from "react";
+import type { NextPageWithLayout } from "types";
+import { UserStatusBarLayout } from "src/layouts";
+import { Home } from "src/domains";
 
-const Home: NextPage = () => {
-  return <div className={styles.container}>Home Page</div>;
+const HomePage: NextPageWithLayout = () => {
+  return <Home />;
 };
 
-export default Home;
+HomePage.getLayout = function getLayout(page: ReactElement) {
+  return <UserStatusBarLayout>{page}</UserStatusBarLayout>;
+};
+
+export default HomePage;

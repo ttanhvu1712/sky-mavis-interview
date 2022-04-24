@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import styles from "./Login.module.scss";
+import { Login } from "src/domains";
 
-const Login: NextPage = () => {
-  return <div className={styles.container}>Login Page</div>;
+const LoginPage: NextPage = () => {
+  return <Login />;
 };
 
-export default Login;
+export default LoginPage;
