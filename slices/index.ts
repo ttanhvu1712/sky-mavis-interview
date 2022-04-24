@@ -1,10 +1,12 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import asyncThunkReducer from "./asyncThunk";
+import userInfoReducer from "./userInfo";
+import marketInfoReducer from "./marketInfo";
 import logger from "redux-logger";
 
 export const store = configureStore({
   reducer: {
-    asyncThunk: asyncThunkReducer,
+    userInfo: userInfoReducer,
+    marketInfo: marketInfoReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) => {
