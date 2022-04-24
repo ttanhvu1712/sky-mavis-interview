@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import * as MarketService from "./services";
-import type { RootState } from "slices";
+import * as MarketService from "./marketInfoServices";
+import type { RootState } from "src/slices";
 
-export type MarketInfoState = {
+type MarketInfoState = {
   asyncActionPending: string | null;
   asyncActionError: string | null;
   exchangeRates: {
@@ -22,7 +22,7 @@ const initialState: MarketInfoState = {
   },
 };
 
-export const getExchangeRates = createAsyncThunk(
+const getExchangeRates = createAsyncThunk(
   "getExchangeRates",
   async (params: { target: string }) => {
     const response = await MarketService.getExchangeRates(params.target);
@@ -30,7 +30,7 @@ export const getExchangeRates = createAsyncThunk(
   }
 );
 
-export const marketInfoSlice = createSlice({
+const marketInfoSlice = createSlice({
   name: "marketInfo",
   initialState,
   reducers: {},

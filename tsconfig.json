@@ -16,13 +16,16 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/interfaces/*": ["interfaces/*"],
-      "@/layout/*": ["layout/*"],
-      "@/slices/*": ["slices/*"],
-      "@/styles/*": ["styles/*"],
-    },
+      "@/src/*": ["src/src/*"],
+      "@/styles/*": ["styles/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "slices/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/slices/*.ts",
+    "src/layouts/NavBarLayout/NavBarLayout.tss"
+  ],
   "exclude": ["node_modules"]
 }

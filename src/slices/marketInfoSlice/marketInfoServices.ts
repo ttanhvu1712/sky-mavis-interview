@@ -1,4 +1,4 @@
-import axios, { mockAdapter } from "utils/axios";
+import axios, { mockAdapter } from "src/utils/axios";
 
 mockAdapter
   .onPost("/markets/exchangeRates", {

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "slices";
-import * as UserService from "./services";
+import type { RootState } from "src/slices";
+import * as UserService from "./userInfoService";
 
 export type UserInfoState = {
   asyncActionPending: string | null;

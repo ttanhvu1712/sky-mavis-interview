@@ -1,6 +1,6 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import userInfoReducer from "./userInfo";
-import marketInfoReducer from "./marketInfo";
+import userInfoReducer from "./userInfoSlice";
+import marketInfoReducer from "./marketInfoSlice";
 import logger from "redux-logger";
 
 export const store = configureStore({
