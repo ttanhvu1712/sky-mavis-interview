@@ -5,6 +5,7 @@ import * as UserService from "./userInfoService";
 export type UserInfoState = {
   asyncActionPending: string | null;
   asyncActionError: string | null;
+  loginStatus: "login" | "logout";
   profile: {
     userName: string;
     walletAddress: string;
@@ -20,6 +21,7 @@ export type UserInfoState = {
 const initialState: UserInfoState = {
   asyncActionPending: null,
   asyncActionError: null,
+  loginStatus: "logout",
   profile: {
     userName: "",
     walletAddress: "",
@@ -32,10 +34,13 @@ const initialState: UserInfoState = {
   },
 };
 
-export const userLogin = createAsyncThunk("userLogin", async () => {
-  const response = await UserService.login();
-  return response.data;
-});
+export const userLogin = createAsyncThunk(
+  "userLogin",
+  async (params: { passwords: string }) => {
+    const response = await UserService.login(params.passwords);
+    return response.data;
+  }
+);
 
 export const userSendAssets = createAsyncThunk(
   "userSendAssets",
@@ -56,11 +61,13 @@ export const userInfoSlice = createSlice({
     });
     builder.addCase(userLogin.fulfilled, (state, { payload }) => {
       state.asyncActionPending = null;
+      state.loginStatus = "login";
       state.profile = payload?.profile ?? {};
       state.balances = payload?.balances ?? {};
     });
     builder.addCase(userLogin.rejected, (state) => {
       state.asyncActionPending = null;
+      state.loginStatus = "logout";
       state.asyncActionError = "userLogin";
     });
     //send assets

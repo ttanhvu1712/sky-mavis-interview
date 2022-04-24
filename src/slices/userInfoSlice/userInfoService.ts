@@ -1,6 +1,6 @@
 import axios, { mockAdapter } from "src/utils/axios";
 
-mockAdapter.onGet("/users/login").reply(200, {
+mockAdapter.onPost("/users/login").reply(200, {
   profile: {
     userName: "Ronin",
     walletAddress: "7300 3777 3888 3334",
@@ -13,8 +13,8 @@ mockAdapter.onGet("/users/login").reply(200, {
   },
 });
 
-export const login = async () => {
-  const response = await axios.get("/users/login");
+export const login = async (passwords: string) => {
+  const response = await axios.post("/users/login", { data: { passwords } });
   return response;
 };
 

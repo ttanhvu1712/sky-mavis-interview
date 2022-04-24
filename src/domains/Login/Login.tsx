@@ -1,13 +1,34 @@
-import React, { useState } from "react";
-import { FormField, PaperFall } from "src/components";
-import Image from "Next/image";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { Button, FormField, PaperFall } from "src/components";
+import { useAppDispatch, useAppSelector } from "src/slices/hooks";
+import { actions, selector } from "src/slices/userInfoSlice";
 import styles from "./Login.module.scss";
 
+const { userLogin } = actions;
+
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const { asyncActionPending, loginStatus } = useAppSelector(selector);
+  const isLoginPending = asyncActionPending === "userLogin";
+
   const [passwords, setPasswords] = useState<string>("");
+  const [showPasswords, setShowPasswords] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (loginStatus === "login") router.push("/home");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginStatus]);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswords(e.target.value)
+    setPasswords(e.target.value);
+  };
+
+  const unlockHandler = () => {
+    dispatch(userLogin({ passwords }));
   };
 
   return (
@@ -26,11 +47,30 @@ const Login: React.FC = () => {
         className={styles.passwords}
         value={passwords}
         onChange={changeHandler}
-        type={"password"}
+        type={showPasswords ? "text" : "password"}
         leftTitle={"ENTER PASSPORT"}
         rightTitle={"available: 50 EUR"}
-        // leftComponent={<image className={styles.eyeButton} src={}/>}
+        rightComponent={
+          <Image
+            className={styles.eyeButton}
+            src={require("./assets/eye.png")}
+            width={24}
+            height={24}
+            alt="icon-eye"
+            onClick={(e) => setShowPasswords(!showPasswords)}
+          />
+        }
       />
+      <Button
+        onClick={unlockHandler}
+        type={"active"}
+        size={"small"}
+        loading={isLoginPending}
+        className={styles.unlock}
+        disabled={passwords.length === 0}
+      >
+        Unlock
+      </Button>
     </div>
   );
 };

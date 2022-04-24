@@ -6,5 +6,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-export const mockAdapter = new AxiosMockAdapter(axiosInstance);
+export const mockAdapter = new AxiosMockAdapter(axiosInstance, {
+  delayResponse: 2000,
+});
 export default axiosInstance;

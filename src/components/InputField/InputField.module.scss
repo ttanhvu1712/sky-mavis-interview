@@ -12,16 +12,18 @@
   flex-direction: row;
   align-items: center;
   margin-top: toVW(4);
+  padding: toVW(16);
 
   input {
     border: none;
     outline: none;
-    height: 100%;
+    height: toVW(38);
     border-radius: 8px;
     color: #151a30;
     font-family: $font-secondary;
     font-style: normal;
     font-weight: 400;
     font-size: toVW(14);
+    flex: 1 1;
   }
 }
