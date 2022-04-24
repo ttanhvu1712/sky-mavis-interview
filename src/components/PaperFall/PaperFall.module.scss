@@ -1,0 +1,28 @@
+.flake {
+  top: 0;
+  width: var(--size);
+  height: var(--size);
+  position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+}
+
+@keyframes paperFall {
+  0% {
+    transform: translate(var(--left), 0) rotate(45deg);
+  }
+  100% {
+    transform: translate(var(--left), 100vh) rotate(45deg);
+  }
+}
+
+@for $i from 1 through 100 {
+  .flake:nth-child(#{$i}) {
+    --size: #{random(10) * 0.2 + 1}vw;
+    --left: #{random(120) - 10}vw;
+    left: var(--left);
+    background: rgba(random(255), random(255), random(255), random(100) * 0.01);
+    animation: paperFall #{10 + random(10)}s linear infinite;
+    animation-delay: -#{random(20)}s;
+  }
+}
