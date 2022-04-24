@@ -1,0 +1,36 @@
+@import "styles/functions";
+@import "styles/variables";
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: toVW(20);
+  .statusBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .name {
+      width: toVW(126);
+      height: toVW(32);
+      font-family: $font-primary;
+      font-weight: 700;
+      font-size: toVW(12);
+      line-height: toVW(20);
+      color: #151a30;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #f7f9fc;
+      border-radius: 8px;
+      &::before {
+        content: "";
+        width: toVW(8);
+        height: toVW(8);
+        background: #1273EA;
+        border-radius: 50%;
+      }
+    }
+  }
+}
