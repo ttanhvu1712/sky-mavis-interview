@@ -1,8 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { useAppSelector } from "src/slices/hooks";
-import { selector } from "src/slices/userInfoSlice";
+import { useRouter } from "next/router";
+import { useAppDispatch, useAppSelector } from "src/slices/hooks";
+import { actions, selector } from "src/slices/userInfoSlice";
 import styles from "./UserStatusBarLayout.module.scss";
+
+const { userLogout } = actions;
 
 type UserStatusBarLayoutProps = {
   children: React.ReactNode;
@@ -11,9 +14,17 @@ type UserStatusBarLayoutProps = {
 const UserStatusBarLayout: React.FC<UserStatusBarLayoutProps> = ({
   children,
 }) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const {
     profile: { userName },
   } = useAppSelector(selector);
+
+  const logout = () => {
+    router.replace("/login");
+    dispatch(userLogout());
+  };
 
   return (
     <div className={styles.container}>
@@ -25,6 +36,7 @@ const UserStatusBarLayout: React.FC<UserStatusBarLayoutProps> = ({
           width={32}
           height={32}
           alt={""}
+          onClick={logout}
         />
       </div>
       {children}

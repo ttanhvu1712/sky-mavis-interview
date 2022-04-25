@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Button, FormField } from "src/components";
-import { useAppSelector } from "src/slices/hooks";
-import { selector } from "src/slices/userInfoSlice";
-import type { BalancesInfo, ExchangeRate } from "src/types";
+import { useAppDispatch, useAppSelector } from "src/slices/hooks";
+import { actions, selector } from "src/slices/userInfoSlice";
+import type { BalancesInfo } from "src/types";
 import styles from "./Exchange.module.scss";
-import { ChangeAssetFieldModal } from "./components";
+import { ChangeAssetFieldModal, ExchangeSuccessModal } from "./components";
+import { formatCurrencyNumber } from "src/utils";
+
+const { userSendAssets, resetExchangeStatus } = actions;
 
 type ExchangeForm = {
   to: string;
@@ -16,18 +19,31 @@ type ExchangeForm = {
 
 const Exchange: React.FC = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
+    asyncActionPending,
+    exchangeStatus,
     profile: { walletAddress },
     balances,
   } = useAppSelector(selector);
+  const isSendAssetPending = asyncActionPending === "userSendAssets";
 
   const [assetListVisible, setAssetListVisible] = useState<boolean>(false);
+  const [successModalVisible, setSuccessModalVisible] =
+    useState<boolean>(false);
   const [form, setForm] = useState<ExchangeForm>({
     to: "",
     asset: "eur",
     amount: 0,
   });
+
+  useEffect(() => {
+    if (exchangeStatus === "success") {
+      setSuccessModalVisible(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exchangeStatus]);
 
   const changeFormHandler = (
     field: keyof ExchangeForm,
@@ -51,6 +67,15 @@ const Exchange: React.FC = () => {
       default:
         return "/images/eur.png";
     }
+  };
+
+  const sendAssetHandler = () => {
+    dispatch(userSendAssets(form));
+  };
+
+  const closeSuccessExchangeModalHandler = () => {
+    setSuccessModalVisible(false);
+    dispatch(resetExchangeStatus());
   };
 
   return (
@@ -92,7 +117,9 @@ const Exchange: React.FC = () => {
           <FormField
             type="number"
             leftTitle="Amount"
-            rightTitle="available: 50 EUR"
+            rightTitle={`AVAILABLE: ${formatCurrencyNumber(
+              balances[form.asset]
+            )} ${form.asset}`}
             value={form.amount.toString()}
             rightComponent={
               <Image
@@ -110,7 +137,12 @@ const Exchange: React.FC = () => {
           <Button type="inactive" onClick={() => router.back()}>
             Cancle
           </Button>
-          <Button type="active" onClick={() => {}}>
+          <Button
+            type="active"
+            onClick={sendAssetHandler}
+            loading={isSendAssetPending}
+            disabled={!form.to || form.amount === 0}
+          >
             Send
           </Button>
         </div>
@@ -122,6 +154,11 @@ const Exchange: React.FC = () => {
           changeFormHandler("asset", asset);
           setAssetListVisible(false);
         }}
+      />
+      <ExchangeSuccessModal
+        isOpen={successModalVisible}
+        asset={form.asset}
+        onClose={closeSuccessExchangeModalHandler}
       />
     </>
   );

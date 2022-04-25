@@ -15,7 +15,11 @@ const AssetsList: React.FC<AssetsList> = ({}) => {
       <div className={styles.title}>Assets</div>
       <div className={styles.listContainer}>
         {Object.keys(balances).map((name) => (
-          <AssetTicket key={name} asset={name as keyof BalancesInfo} />
+          <AssetTicket
+            key={name}
+            asset={name as keyof BalancesInfo}
+            onClick={() => {}}
+          />
         ))}
       </div>
     </div>

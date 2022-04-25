@@ -59,6 +59,7 @@
     font-weight: 600;
     font-size: toVW(14);
     line-height: toVW(20);
+    text-align: center;
   }
 }
 
@@ -67,6 +68,7 @@
   .text {
     color: #ffffff;
     .loading {
+      width: 100%;
       * {
         background-color: #ffffff;
       }
@@ -79,6 +81,7 @@
   .text {
     color: #1273ea;
     .loading {
+      width: 100%;
       * {
         background-color: #1273ea;
       }

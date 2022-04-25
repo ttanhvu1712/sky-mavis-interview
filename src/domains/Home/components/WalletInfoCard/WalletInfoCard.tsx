@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import styles from "./WalletInfoCard.module.scss";
 import { useAppSelector } from "src/slices/hooks";
-import { selector } from "src/slices/userInfoSlice";
+import { selector as userInfoSelector } from "src/slices/userInfoSlice";
+import { selector as marketInfoSelector } from "src/slices/marketInfoSlice";
+import { BalancesInfo } from "src/types";
+import { formatCurrencyNumber } from "src/utils";
+import { BouncingDots } from "src/components";
 
 type WalletInfoCardProps = {};
 
@@ -10,9 +14,21 @@ const WalletInfoCard: React.FC<WalletInfoCardProps> = ({}) => {
   const {
     profile: { walletAddress },
     balances,
-  } = useAppSelector(selector);
+  } = useAppSelector(userInfoSelector);
 
-  const totalProperty = 1000;
+  const { asyncActionPending, exchangeRates } =
+    useAppSelector(marketInfoSelector);
+  const isGetExchangeRatePending = asyncActionPending === "getExchangeRates";
+
+  const usdToVnd = exchangeRates["usd"] !== 0 ? 1 / exchangeRates["usd"] : 1;
+  const totalProperty = useMemo(() => {
+    return Object.keys(balances).reduce((result, key) => {
+      const assetValue =
+        balances[key as keyof BalancesInfo] *
+        exchangeRates[key as keyof BalancesInfo];
+      return result + assetValue;
+    }, 0);
+  }, [balances, exchangeRates]);
 
   return (
     <div className={styles.container}>
@@ -26,8 +42,20 @@ const WalletInfoCard: React.FC<WalletInfoCardProps> = ({}) => {
           height={16}
         />
       </div>
-      <div className={styles.totalPropertyInUSD}>10,000 USD</div>
-      <div className={styles.totalPropertyInVND}>23,046,000 VND</div>
+      <div className={styles.totalPropertyInUSD}>
+        {!isGetExchangeRatePending ? (
+          `${formatCurrencyNumber(totalProperty * usdToVnd)} USD`
+        ) : (
+          <BouncingDots className={styles.loading} />
+        )}
+      </div>
+      <div className={styles.totalPropertyInVND}>
+        {!isGetExchangeRatePending ? (
+          `${formatCurrencyNumber(totalProperty)} VND`
+        ) : (
+          <BouncingDots className={styles.loading} />
+        )}
+      </div>
       <div className={styles.iconRonin}>
         <Image
           src={require("./assets/ronin-white.png")}

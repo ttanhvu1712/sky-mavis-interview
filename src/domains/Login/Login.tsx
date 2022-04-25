@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
 
   useEffect(() => {
-    if (loginStatus === "login") router.push("/home");
+    if (loginStatus === "login") router.replace("/home");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginStatus]);
 

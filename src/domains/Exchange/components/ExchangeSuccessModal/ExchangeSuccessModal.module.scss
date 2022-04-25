@@ -1,0 +1,34 @@
+@import "styles/functions";
+@import "styles/variables";
+
+.container {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  padding: toVW(20);
+
+  .title {
+    font-family: $font-primary;
+    font-style: normal;
+    font-weight: 700;
+    font-size: toVW(20);
+    line-height: toVW(28);
+    text-align: center;
+    color: #151a30;
+  }
+
+  .description {
+    font-family: $font-primary;
+    font-style: normal;
+    font-weight: 400;
+    font-size: toVW(14);
+    line-height: toVW(20);
+    color: #151a30;
+    margin-top: toVW(24);
+  }
+
+  .button {
+    margin-top: toVW(24);
+  }
+}

@@ -1,7 +1,7 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import userInfoReducer from "./userInfoSlice";
 import marketInfoReducer from "./marketInfoSlice";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 
 export const store = configureStore({
   reducer: {
@@ -9,9 +9,9 @@ export const store = configureStore({
     marketInfo: marketInfoReducer,
   },
   devTools: true,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(logger);
-  },
+  // middleware: (getDefaultMiddleware) => {
+  //   return getDefaultMiddleware().concat(logger);
+  // },
 });
 
 export type AppDispatch = typeof store.dispatch;

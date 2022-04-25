@@ -44,6 +44,13 @@
     line-height: toVW(40);
     margin-top: toVW(12);
     color: #ffffff;
+    .loading {
+      margin-top: toVW(16);
+      align-items: flex-start;
+      * {
+        background-color: #ffffff;
+      }
+    }
   }
   .totalPropertyInVND {
     font-family: $font-primary;
@@ -53,6 +60,14 @@
     line-height: toVW(24);
     margin-top: toVW(4);
     color: #8dc9f9;
+    .loading {
+      margin-top: toVW(40);
+      align-items: flex-start;
+      justify-content: center;
+      * {
+        background-color: #8dc9f9;
+      }
+    }
   }
   .iconRonin {
     position: absolute;

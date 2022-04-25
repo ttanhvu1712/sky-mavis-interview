@@ -7,6 +7,7 @@ import { selector as userInfoSelector } from "src/slices/userInfoSlice";
 import { selector as marketSelector } from "src/slices/marketInfoSlice";
 import { formatCurrencyNumber } from "src/utils";
 import clsx from "clsx";
+import BouncingDots from "../BouncingDots";
 
 type AssetTicketProps = {
   asset: keyof BalancesInfo;
@@ -20,7 +21,8 @@ const AssetTicket: React.FC<AssetTicketProps> = ({
   onClick,
 }) => {
   const { balances } = useAppSelector(userInfoSelector);
-  const { exchangeRates } = useAppSelector(marketSelector);
+  const { asyncActionPending, exchangeRates } = useAppSelector(marketSelector);
+  const isGetExchangeRatePending = asyncActionPending === "getExchangeRates";
 
   const icons = {
     eur: "/images/eur.png",
@@ -45,7 +47,9 @@ const AssetTicket: React.FC<AssetTicketProps> = ({
       </div>
       <div className={styles.values}>
         <div className={styles.rawValue}>{getRawValue(asset)}</div>
-        <div className={styles.valueInVND}>{getValueInVND(asset)}</div>
+        <div className={styles.valueInVND}>
+          {isGetExchangeRatePending ? <BouncingDots className={styles.loading}/> : getValueInVND(asset)}
+        </div>
       </div>
     </div>
   );

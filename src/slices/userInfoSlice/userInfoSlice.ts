@@ -7,6 +7,7 @@ export type UserInfoState = {
   asyncActionPending: string | null;
   asyncActionError: string | null;
   loginStatus: "login" | "logout";
+  exchangeStatus: "none" | "success" | "fail";
   profile: UserProfile;
   balances: BalancesInfo;
 };
@@ -15,6 +16,7 @@ const initialState: UserInfoState = {
   asyncActionPending: null,
   asyncActionError: null,
   loginStatus: "logout",
+  exchangeStatus: "none",
   profile: {
     userName: "",
     walletAddress: "",
@@ -37,8 +39,12 @@ export const userLogin = createAsyncThunk(
 
 export const userSendAssets = createAsyncThunk(
   "userSendAssets",
-  async (params: { value: number; currency: string }) => {
-    const response = await UserService.send(params.value, params.currency);
+  async (params: { to: string; asset: string; amount: number }) => {
+    const response = await UserService.send(
+      params.to,
+      params.asset,
+      params.amount
+    );
     return response.data;
   }
 );
@@ -46,7 +52,16 @@ export const userSendAssets = createAsyncThunk(
 export const userInfoSlice = createSlice({
   name: "userInfo",
   initialState,
-  reducers: {},
+  reducers: {
+    resetExchangeStatus: (state) => {
+      state.exchangeStatus = initialState.exchangeStatus;
+    },
+    userLogout: (state) => {
+      state.loginStatus = initialState.loginStatus;
+      state.profile = initialState.profile;
+      state.balances = initialState.balances;
+    },
+  },
   extraReducers: (builder) => {
     //login
     builder.addCase(userLogin.pending, (state) => {
@@ -70,10 +85,12 @@ export const userInfoSlice = createSlice({
     builder.addCase(userSendAssets.fulfilled, (state, { payload }) => {
       state.asyncActionPending = null;
       state.balances = payload?.balances ?? {};
+      state.exchangeStatus = payload?.status;
     });
     builder.addCase(userSendAssets.rejected, (state) => {
       state.asyncActionPending = null;
       state.asyncActionError = "userSendAssets";
+      state.exchangeStatus = "fail";
     });
   },
 });

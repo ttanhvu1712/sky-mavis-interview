@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import Image from "next/image";
 import { AssetTicket, Modal } from "src/components";
 import { useAppSelector } from "src/slices/hooks";

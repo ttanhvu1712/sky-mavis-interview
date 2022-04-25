@@ -14,7 +14,7 @@ mockAdapter.onPost("/users/login").reply(200, {
 });
 
 export const login = async (passwords: string) => {
-  const response = await axios.post("/users/login", { data: { passwords } });
+  const response = await axios.post("/users/login", { passwords });
   return response;
 };
 
@@ -27,7 +27,7 @@ mockAdapter.onPost("/users/send").reply(200, {
   },
 });
 
-export const send = async (value: number, currency: string) => {
-  const response = await axios.post("/users/send", { value, currency });
+export const send = async (to: string, asset: string, amount: number) => {
+  const response = await axios.post("/users/send", { to, asset, amount });
   return response;
 };
