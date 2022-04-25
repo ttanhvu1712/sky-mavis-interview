@@ -49,7 +49,6 @@ const Login: React.FC = () => {
         onChange={changeHandler}
         type={showPasswords ? "text" : "password"}
         leftTitle={"ENTER PASSPORT"}
-        rightTitle={"available: 50 EUR"}
         rightComponent={
           <Image
             className={styles.eyeButton}
