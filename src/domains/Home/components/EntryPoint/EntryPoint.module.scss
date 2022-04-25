@@ -27,8 +27,10 @@
   }
   .active {
     opacity: 1;
+    pointer-events: auto;
   }
   .inactive {
     opacity: 0.5;
+    pointer-events: none;
   }
 }

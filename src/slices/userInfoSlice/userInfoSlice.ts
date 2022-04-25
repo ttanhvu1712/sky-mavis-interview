@@ -1,21 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "src/slices";
+import type { BalancesInfo, UserProfile } from "src/types";
 import * as UserService from "./userInfoService";
 
 export type UserInfoState = {
   asyncActionPending: string | null;
   asyncActionError: string | null;
   loginStatus: "login" | "logout";
-  profile: {
-    userName: string;
-    walletAddress: string;
-    token: string;
-  };
-  balances: {
-    eur: number;
-    yen: number;
-    usd: number;
-  };
+  profile: UserProfile;
+  balances: BalancesInfo;
 };
 
 const initialState: UserInfoState = {

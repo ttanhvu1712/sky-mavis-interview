@@ -27,3 +27,11 @@
     flex: 1 1;
   }
 }
+
+.disabled {
+  background: #edf1f7;
+  border: 1px solid #c5cee0;
+  input {
+    color: #8f9bb3;
+  }
+}

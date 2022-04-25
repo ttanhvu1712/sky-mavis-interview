@@ -8,7 +8,7 @@ export type InputFieldProps = {
   type?: React.HTMLInputTypeAttribute;
   leftComponent?: React.ReactElement;
   rightComponent?: React.ReactElement;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const InputField: React.FC<InputFieldProps> = ({

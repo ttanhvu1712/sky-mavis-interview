@@ -1,15 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as MarketService from "./marketInfoServices";
 import type { RootState } from "src/slices";
+import type { ExchangeRate } from "src/types";
 
 type MarketInfoState = {
   asyncActionPending: string | null;
   asyncActionError: string | null;
-  exchangeRates: {
-    usd: number;
-    yen: number;
-    eur: number;
-  };
+  exchangeRates: ExchangeRate;
 };
 
 const initialState: MarketInfoState = {

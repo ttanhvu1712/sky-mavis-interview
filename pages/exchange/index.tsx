@@ -8,7 +8,7 @@ const ExchangePage: NextPageWithLayout = () => {
 };
 
 ExchangePage.getLayout = function getLayout(page: ReactElement) {
-  return <NavBarLayout>{page}</NavBarLayout>;
+  return <NavBarLayout title="Send Assets">{page}</NavBarLayout>;
 };
 
 export default ExchangePage;

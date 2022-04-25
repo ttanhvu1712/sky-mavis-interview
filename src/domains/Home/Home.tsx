@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styles from "./Home.module.scss";
 import { PaperFall } from "src/components";
 import { AssetsList, EntryPoint, WalletInfoCard } from "./components";
-import { useAppDispatch } from "src/slices/hooks";
-import { actions } from "src/slices/marketInfoSlice";
+import { useAppDispatch, useAppSelector } from "src/slices/hooks";
+import { actions, selector } from "src/slices/marketInfoSlice";
 
 const { getExchangeRates } = actions;
 
