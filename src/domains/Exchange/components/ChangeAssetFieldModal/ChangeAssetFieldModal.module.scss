@@ -2,8 +2,46 @@
 @import "styles/variables";
 
 .container {
-  width: 100vw;
-  height: 100vh;
-  background: #151a30;
-  opacity: 0.5;
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  height: 100%;
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: toVW(60);
+    border-bottom: 2px solid #c5cee0;
+    padding: 0 toVW(16);
+    position: relative;
+
+    .title {
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: toVW(14);
+      line-height: toVW(20);
+      text-align: center;
+      color: #151a30;
+    }
+
+    .closeIcon {
+      position: absolute;
+      right: toVW(16);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .list {
+    margin-top: toVW(8);
+    .ticket {
+      border-radius: 0;
+      background-color: #ffffff;
+    }
+    .highlight {
+      background: #edf1f7;
+    }
+  }
 }

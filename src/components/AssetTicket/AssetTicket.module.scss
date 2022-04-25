@@ -1,0 +1,39 @@
+@import "styles/functions";
+@import "styles/variables";
+
+.assetTicket {
+  width: 100%;
+  height: toVW(64);
+  background: #f7f9fc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: toVW(16);
+  margin-bottom: toVW(8);
+  .icon {
+    margin-right: toVW(16);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .values {
+    .rawValue {
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: toVW(14);
+      line-height: toVW(20);
+    }
+    .valueInVND {
+      font-family: $font-primary;
+      font-style: normal;
+      font-weight: 400;
+      font-size: toVW(12);
+      line-height: toVW(16);
+      color: #8f9bb3;
+    }
+  }
+}

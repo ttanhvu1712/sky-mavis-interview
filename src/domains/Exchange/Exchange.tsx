@@ -6,7 +6,7 @@ import { useAppSelector } from "src/slices/hooks";
 import { selector } from "src/slices/userInfoSlice";
 import type { BalancesInfo, ExchangeRate } from "src/types";
 import styles from "./Exchange.module.scss";
-import { ChangeAssetFieldModal } from "./components"
+import { ChangeAssetFieldModal } from "./components";
 
 type ExchangeForm = {
   to: string;
@@ -115,7 +115,14 @@ const Exchange: React.FC = () => {
           </Button>
         </div>
       </div>
-      {/* <ChangeAssetFieldModal isOpen={true} /> */}
+      <ChangeAssetFieldModal
+        isOpen={assetListVisible}
+        currentAsset={form.asset}
+        onChange={(asset) => {
+          changeFormHandler("asset", asset);
+          setAssetListVisible(false);
+        }}
+      />
     </>
   );
 };
