@@ -20,8 +20,9 @@
     box-shadow: 0px 4px 12px #f7f9fc;
     .leftButton {
       position: absolute;
-      top: 12px;
-      left: 20px;
+      top: 50%;
+      left: toVW(20);
+      transform: translateY(-50%);
     }
     .title {
       font-family: $font-secondary;
